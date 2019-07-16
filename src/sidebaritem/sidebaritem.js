@@ -1,5 +1,5 @@
   
-import React from 'react';
+import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import ListItem from '@material-ui/core/ListItem';
@@ -8,7 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { removeHTMLTags } from '../helpers';
 
 
-export default class SideBarItemComponent extends Component {
+class SideBarItemComponent extends Component {
 constructor() {
     super();
 }    
