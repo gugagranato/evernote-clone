@@ -20,7 +20,7 @@ const styles = theme => ({
       width: '100%',
       height: '35px',
       borderBottom: '1px solid black',
-      borderRadius: '0px',
+      borderRadius: '4px',
       backgroundColor: '#29487d',
       color: 'white',
       '&:hover': {
@@ -50,8 +50,11 @@ const styles = theme => ({
     newNoteSubmitBtn: {
       width: '100%',
       backgroundColor: '#28787c',
-      borderRadius: '0px',
-      color: 'white'
+      borderRadius: '4px',
+      color: 'white',
+      '&:hover': {
+        backgroundColor: '#369396'
+      }
     }
   });
   

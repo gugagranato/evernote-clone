@@ -10,33 +10,63 @@ class EditorComponent extends Component {
         super();
         this.state = {
             text: '',
-            title: '', 
+            title: '',
             id: ''
+        };
+    }
+
+    componentDidMount = () => {
+        this.setState({
+            text: this.props.selectedNote.body,
+            title: this.props.selectedNote.title,
+            id: this.props.selectedNote.id
+        });
+    }
+
+    componentDidUpdate = () => {
+        if (this.props.selectedNote.id !== this.state.id) {
+            this.setState({
+                text: this.props.selectedNote.body,
+                title: this.props.selectedNote.title,
+                id: this.props.selectedNote.id
+            });
         }
     }
-  
+
     render() {
 
         const { classes } = this.props;
 
-    return (
-        <div className={classes.editorContainer}>
-            <ReactQuill 
-                value={this.state.text}
-                onChange={this.updateBody}>
-            </ReactQuill>
-        </div> 
-    );
-  }
-
-  updateBody = async (val) => {
-    await this.setState({ text: val });
-    this.update();
-  };
-
-  update = debounce(() => {
-    console.log('update database')
-    }, 1500);
+        return (
+            <div className={classes.editorContainer}>
+                <BorderColorIcon className={classes.editIcon}></BorderColorIcon>
+                <input
+                    className={classes.titleInput}
+                    placeholder='Note title...'
+                    value={this.state.title ? this.state.title : ''}
+                    onChange={(e) => this.updateTitle(e.target.value)}>
+                </input>
+                <ReactQuill
+                    value={this.state.text}
+                    onChange={this.updateBody}>
+                </ReactQuill>
+            </div>
+        );
+    }
+    updateBody = async (val) => {
+        await this.setState({ text: val });
+        this.update();
+    };
+    updateTitle = async (txt) => {
+        await this.setState({ title: txt });
+        this.update();
+    }
+    update = debounce(() => {
+        this.props.noteUpdate(this.state.id, {
+            title: this.state.title,
+            body: this.state.text
+        })
+    }, 1000);
 }
 
 export default withStyles(styles)(EditorComponent);
