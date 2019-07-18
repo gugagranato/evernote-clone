@@ -7,15 +7,34 @@ import SidebarItemComponent from '../sidebaritem/sidebaritem';
 
 
 class SidebarComponent extends Component {
-constructor() {
+  constructor() {
     super();
-}
+
+    this.state = {
+      addingNote: false,
+      title: null
+    };
+  }
   render() {
+
+    const { notes, classes, selectedNoteIndex } = this.props
+
     return (
-    
-    <div>Hello From sidebar</div>
+      <div className={classes.sidebarContainer}>
+        <Button
+          onClick={this.newNoteBtnClick}
+          className={classes.newNoteBtn} >New note</Button>
+      </div>
+
     );
   }
+
+  newNoteBtnClick = () => {
+    console.log('new btn clicked')
+  }
+
+
+
 }
 
 export default withStyles(styles)(SidebarComponent);

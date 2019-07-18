@@ -18,9 +18,14 @@ class App extends Component {
   }
   
   render() {
+
+    const { selectedNote, selectedNoteIndex, notes } = this.props;
+
     return (
       <div className="app-container">
-        <SidebarComponent />
+        <SidebarComponent 
+          selectedNoteIndex={selectedNoteIndex}
+          notes={notes}  />
         <EditorComponent />
       </div>
 
